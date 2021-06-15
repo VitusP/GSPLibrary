@@ -5,3 +5,4 @@ This is an open source project where scholars could share unused book or other c
 
 ## Architecture Overview
 
+![image](https://bezkoder.com/wp-content/uploads/2020/03/react-node-express-mongodb-mern-stack-example-architecture.png)
