@@ -16,6 +16,7 @@ exports.create = (req, res) => {
     isbn: req.body.isbn,
     author: req.body.author,
     available: req.body.available ? req.body.available : false,
+    class: req.body.class,
     owner: {
       name: req.body.owner.name,
       contact: req.body.owner.contact,

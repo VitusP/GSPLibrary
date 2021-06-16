@@ -21,7 +21,7 @@ module.exports = app => {
     // Delete a books with id
     router.delete("/:id", books.delete);
   
-    // Create a new books
+    // delete books
     router.delete("/", books.deleteAll);
   
     app.use('/api/books', router);
