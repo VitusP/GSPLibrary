@@ -1,10 +1,18 @@
 const db = require("../models");
 const Book = db.books;
+const fs = require("fs");
 
 // Create and Save a new Book
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
+    if (req.file) {
+        var mainPath = __dirname.substr(0, __dirname.length - 15)
+      fs.unlink(mainPath + req.file.path, (err) => {
+        if (err) throw err;
+        console.log(`${__dirname + req.file.path} was deleted`);
+      });
+    }
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
@@ -22,6 +30,7 @@ exports.create = (req, res) => {
       contact: req.body.owner.contact,
       cohort: req.body.owner.cohort,
     },
+    image: req.file ? req.file.path : "",
   });
 
   // Save book to db
@@ -135,14 +144,13 @@ exports.deleteAll = (req, res) => {
 
 // Find all published Book
 exports.findAllAvailable = (req, res) => {
-    Book.find({ available: true })
-    .then(data => {
+  Book.find({ available: true })
+    .then((data) => {
       res.send(data);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving Book."
+        message: err.message || "Some error occurred while retrieving Book.",
       });
     });
 };
