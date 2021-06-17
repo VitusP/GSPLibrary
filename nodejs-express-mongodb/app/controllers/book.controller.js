@@ -1,13 +1,13 @@
 const db = require("../models");
 const Book = db.books;
 const fs = require("fs");
+const mainPath = __dirname.substr(0, __dirname.length - 15);
 
 // Create and Save a new Book
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.title) {
     if (req.file) {
-        var mainPath = __dirname.substr(0, __dirname.length - 15)
       fs.unlink(mainPath + req.file.path, (err) => {
         if (err) throw err;
         console.log(`${__dirname + req.file.path} was deleted`);
@@ -115,6 +115,13 @@ exports.delete = (req, res) => {
           message: `Cannot delete Book with id=${id}. Maybe Book was not found!`,
         });
       } else {
+        // Delete file
+        if (data.image) {
+          fs.unlink(mainPath + data.image, (err) => {
+            if (err) throw err;
+            console.log(`${__dirname + data.image} was deleted`);
+          });
+        }
         res.send({
           message: "Book was deleted successfully!",
         });
@@ -129,15 +136,37 @@ exports.delete = (req, res) => {
 
 // Delete all Book from the database.
 exports.deleteAll = (req, res) => {
-  Book.deleteMany({})
+  // Find all book and delete their files
+  Book.find({})
     .then((data) => {
-      res.send({
-        message: `${data.deletedCount} Book were deleted successfully!`,
+      console.log(data);
+      data.forEach((listedBook) => {
+        // Delete file
+        if (listedBook.image) {
+          fs.unlink(mainPath + listedBook.image, (err) => {
+            if (err) throw err;
+            console.log(`${__dirname + listedBook.image} was deleted`);
+          });
+        }
       });
+
+      Book.deleteMany({})
+        .then((data) => {
+          console.log(data);
+          res.send({
+            message: `${data.deletedCount} Book were deleted successfully!`,
+          });
+        })
+        .catch((err) => {
+          res.status(500).send({
+            message:
+              err.message || "Some error occurred while removing all Book.",
+          });
+        });
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Some error occurred while removing all Book.",
+        message: err.message || "Some error occurred while deleting books.",
       });
     });
 };
