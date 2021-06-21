@@ -8,19 +8,14 @@ module.exports = mongoose => {
           isbn: String,
           author: String,
           available: Boolean,
+          class: String,
           owner:
           {
               name: String,
               contact: String,
               cohort: Number
           },
-          img: 
-          {
-              data: Buffer,
-              contentType: String
-          }
-
-
+          image: String
         },
         { timestamps: true }
       )
