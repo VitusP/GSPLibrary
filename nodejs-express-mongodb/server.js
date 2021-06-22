@@ -12,11 +12,6 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Simple API route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to GSPLibrary Application by Vitus Putra!" });
-});
-
 require("./app/routes/book.routes")(app);
 // Set port and listen to requests
 const PORT = process.env.PORT || 8080;
