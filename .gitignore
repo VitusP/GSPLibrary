@@ -14,6 +14,7 @@ command.md
 *.user
 *.userosscache
 *.sln.docstates
+images/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -353,3 +354,5 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+nodejs-express-mongodb/images/
+nodejs-express-mongodb/images/.DS_Store
