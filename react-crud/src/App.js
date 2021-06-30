@@ -2,6 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import { Link, Switch, Route } from 'react-router-dom';
 import AddBook from "./components/add-book.component";
+import BooksList from "./components/book-list.component"
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
@@ -28,7 +29,7 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route exact path={["/", "/books"]} component={AddBook} />
+            <Route exact path={["/", "/books"]} component={BooksList} />
             <Route exact path="/add" component={AddBook} />
             <Route path="/books/:id" component={AddBook} />
           </Switch>

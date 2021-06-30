@@ -356,3 +356,5 @@ MigrationBackup/
 .ionide/
 nodejs-express-mongodb/images/
 nodejs-express-mongodb/images/.DS_Store
+react-crud/.env
+nodejs-express-mongodb/images/.DS_Store

@@ -43,30 +43,6 @@ export default class AddBook extends Component {
       }, () => {console.log(this.state)});
   }
 
-  onChangeTitle(e) {
-    this.setState({
-      title: e.target.value,
-    });
-  }
-
-  onChangeDescription(e) {
-    this.setState({
-      description: e.target.value,
-    });
-  }
-
-  onChangeIsbn(e) {
-    this.setState({
-      isbn: e.target.value,
-    });
-  }
-
-  onChangeAuthor(e) {
-    this.setState({
-      author: e.target.value,
-    });
-  }
-
   onChangeAvailable(e) {
     var availableQuest = true;
     if (e.target.value !== "true") {
@@ -74,12 +50,6 @@ export default class AddBook extends Component {
     }
     this.setState({
       available: availableQuest,
-    });
-  }
-
-  onChangeClass(e) {
-    this.setState({
-      class: e.target.value,
     });
   }
 
@@ -272,7 +242,7 @@ export default class AddBook extends Component {
                 required
                 value={this.state.owner.cohort}
                 onChange={this.onChangeOwnerCohort}
-                name=" ohort"
+                name="cohort"
               />
             </div>
 
